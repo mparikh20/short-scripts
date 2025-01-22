@@ -17,11 +17,14 @@ from typing import Any
 def flip_one(matrix: list[list[Any]],
              index: int)->list:
 
+    length = len(matrix)
+
+    # add a check to see that the index is within range
+    if not 0 <= index < length:
+        raise IndexError(f'Please specify index value between [0, {length-1}]')
 
     # collect all values in in a reverse order in a list
     values = []
-
-    length = len(matrix)
 
     for x in range(1,length+1):
 
