@@ -30,17 +30,19 @@ class TargetWord:
         with open(filepath, 'r') as file:
             words_str = file.read().strip()
 
-        words_lst = words_str.split()
-        random_index = random.randint(0,len(words_lst))
+        self.words_lst = words_str.split()
+        random_index = random.randint(0,len(self.words_lst))
 
-        self.target_word = words_lst[random_index]
+        self.target_word = self.words_lst[random_index]
 
     def play_round(self, player_word):
         # takes a user's word and provides feedback comparing the 2 strings
+        '''
+        Caveat:
+        '''
 
         if player_word == self.target_word:
             return 'Success'
-
 
         feedback = ''
         for index in range(len(player_word)):
@@ -62,6 +64,8 @@ wordle_1 = TargetWord(filepath)
 
 # access/see the target word
 wod = wordle_1.target_word
+valid_words = wordle_1.words_lst
+
 print(wod)
 user_word = ''
 round_num = 0
@@ -80,6 +84,9 @@ while user_word != wod:
 
     if len(user_word) != len(wod):
         print(f'Error. Word should be of {len(wod)} letters.')
+
+    if user_word not in valid_words:
+        print('Error. Enter a valid word.')
 
     else:
         feedback = wordle_1.play_round(user_word)
